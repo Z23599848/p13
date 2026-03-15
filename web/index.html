@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Stick Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.115/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.115/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        #cesiumContainer {
+            flex-grow: 1;
+            height: 100%;
+        }
+
+        #sidebar {
+            width: 350px;
+            background: #1e293b;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sidebar" class="p-6 overflow-y-auto">
+        <h1 class="text-2xl font-bold mb-4 text-blue-400">Mission Setup</h1>
+
+        <div class="space-y-4">
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-300 mb-2">Launch Target</h2>
+                <label class="block text-sm">Latitude</label>
+                <input type="number" id="l_lat" value="0" step="any"
+                    class="w-full bg-gray-700 rounded p-1 mb-2 text-white">
+                <label class="block text-sm">Longitude</label>
+                <input type="number" id="l_lon" value="0" step="any" class="w-full bg-gray-700 rounded p-1 text-white">
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-300 mb-2">Payload Drop</h2>
+                <label class="block text-sm">Altitude (m)</label>
+                <input type="number" id="p_alt" value="400000" step="any"
+                    class="w-full bg-gray-700 rounded p-1 mb-2 text-white">
+                <label class="block text-sm">Latitude</label>
+                <input type="number" id="p_lat" value="5" step="any"
+                    class="w-full bg-gray-700 rounded p-1 mb-2 text-white">
+                <label class="block text-sm">Longitude</label>
+                <input type="number" id="p_lon" value="5" step="any" class="w-full bg-gray-700 rounded p-1 text-white">
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-300 mb-2">Landing Target</h2>
+                <label class="block text-sm">Latitude</label>
+                <input type="number" id="ld_lat" value="10" step="any"
+                    class="w-full bg-gray-700 rounded p-1 mb-2 text-white">
+                <label class="block text-sm">Longitude</label>
+                <input type="number" id="ld_lon" value="10" step="any"
+                    class="w-full bg-gray-700 rounded p-1 text-white">
+            </div>
+
+            <button id="start-btn"
+                class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded transition-colors shadow-lg">
+                IGNITION
+            </button>
+        </div>
+
+        <div class="mt-8">
+            <h2 class="text-xl font-bold mb-2 text-green-400">Live Telemetry</h2>
+            <div class="bg-gray-900 p-4 rounded-lg font-mono text-sm space-y-2">
+                <div class="flex justify-between"><span>Phase:</span> <span id="t-phase"
+                        class="text-yellow-400">STANDBY</span></div>
+                <div class="flex justify-between"><span>Time:</span> <span id="t-time" class="text-white">0.0 s</span>
+                </div>
+                <div class="flex justify-between"><span>Altitude:</span> <span id="t-alt" class="text-white">0 m</span>
+                </div>
+                <div class="flex justify-between"><span>Velocity:</span> <span id="t-vel" class="text-white">0
+                        m/s</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cesiumContainer"></div>
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
