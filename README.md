@@ -1,6 +1,6 @@
 # Orbital Stick Mission Planner
 
-This project is an advanced iteration of the falling stick physics simulator, scaled up to represent an Earth-scale orbital delivery mission.
+This project is an  iteration of the falling stick physics simulator, scaled up to represent an Earth-scale orbital delivery mission.
 
 ## Features
 - **Spherical ECEF Physics Backend**: The physics engine runs purely in NumPy, detached from rendering code. It computes 6-DOF coordinate integration and spherical targeting, exporting telemetry over a high-speed WebSocket at 20Hz.
